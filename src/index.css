@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: #070a0f;
+  color: #e6edf3;
+}
+
+/* 滚动条 */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0b0f14;
+}
+::-webkit-scrollbar-thumb {
+  background: #272f3c;
+  border-radius: 8px;
+  border: 2px solid #0b0f14;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3a4453;
+}
+
+/* 数字等宽对齐 */
+.tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* 网格背景纹理 */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(16, 185, 129, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 185, 129, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* 入场动画 */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-up {
+  animation: fade-up 0.4s ease-out both;
+}
+
+/* checkbox 自定义 */
+input[type="checkbox"].bet-check {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid #3a4453;
+  border-radius: 5px;
+  background: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+input[type="checkbox"].bet-check:hover {
+  border-color: #10b981;
+}
+input[type="checkbox"].bet-check:checked {
+  background: #10b981;
+  border-color: #10b981;
+}
+input[type="checkbox"].bet-check:checked::after {
+  content: "";
+  width: 6px;
+  height: 11px;
+  border: solid #070a0f;
+  border-width: 0 2.5px 2.5px 0;
+  transform: rotate(45deg) translate(-1px, -1px);
+}
