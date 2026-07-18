@@ -21,10 +21,10 @@ export default function ControlBar() {
   };
 
   return (
-    <header className="sticky top-0 z-30 border-b border-base-700 bg-base-850/90 backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-4 px-6 py-3">
+    <header className="sticky top-0 z-30 w-full border-b border-base-700 bg-base-850/90 backdrop-blur-md">
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-6 gap-y-3 px-6 py-3">
         {/* Logo / 标题 */}
-        <div className="flex items-center gap-3">
+        <div className="flex flex-shrink-0 items-center gap-3">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-500/15 ring-1 ring-accent-500/30">
             <Crosshair className="h-5 w-5 text-accent-400" />
           </div>

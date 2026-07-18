@@ -126,9 +126,9 @@ function DataRow({
   onOddsChange?: (v: number) => void;
 }) {
   return (
-    <div className="flex items-center justify-between text-sm">
-      <span className="text-ink-400">{label}</span>
-      <span className="flex items-center gap-3 font-mono tnum">
+    <div className="flex items-center justify-between gap-2 text-sm">
+      <span className="min-w-0 flex-1 truncate text-ink-400">{label}</span>
+      <span className="flex flex-shrink-0 items-center gap-3 font-mono tnum">
         <EditableNumber
           value={prob}
           mode="percent"
@@ -165,8 +165,8 @@ function EditableNumber({
       <span
         className={
           mode === "percent"
-            ? "w-12 text-right text-ink-500"
-            : "w-12 text-right text-accent-400"
+            ? "min-w-[2.5rem] text-right text-ink-500"
+            : "min-w-[3.5rem] text-right text-accent-400"
         }
       >
         {mode === "percent"
@@ -206,7 +206,7 @@ function EditableNumber({
         }}
         autoFocus
         className={`tnum rounded border border-accent-500 bg-base-800 px-1 py-0.5 text-right text-xs text-ink-50 outline-none focus:ring-1 focus:ring-accent-500/40 ${
-          mode === "percent" ? "w-14" : "w-14"
+          mode === "percent" ? "w-14" : "w-16"
         }`}
       />
     );
@@ -218,8 +218,8 @@ function EditableNumber({
       title="点击修改"
       className={`tnum rounded border border-transparent px-1 py-0.5 text-right transition hover:border-base-600 hover:bg-base-800 ${
         mode === "percent"
-          ? "w-12 text-ink-500"
-          : "w-12 text-accent-400"
+          ? "min-w-[2.5rem] text-ink-500"
+          : "min-w-[3.5rem] text-accent-400"
       }`}
     >
       {mode === "percent" ? `${(value * 100).toFixed(0)}%` : value.toFixed(2)}

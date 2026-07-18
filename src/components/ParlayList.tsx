@@ -65,7 +65,7 @@ export default function ParlayList() {
                       ))}
                     </p>
                     {/* 数据 */}
-                    <div className="grid grid-cols-4 gap-2 font-mono tnum text-[11px]">
+                    <div className="grid grid-cols-2 gap-x-4 gap-y-2 sm:grid-cols-4 font-mono tnum text-[11px]">
                       <Metric label="组合赔率" value={p.combinedOdds.toFixed(2)} />
                       <Metric
                         label="组合概率"
