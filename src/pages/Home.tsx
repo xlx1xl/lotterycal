@@ -11,7 +11,6 @@ export default function Home() {
   const error = useBettingStore((s) => s.error);
 
   useEffect(() => {
-    // 默认加载示例数据，方便首次使用
     useBettingStore.getState().loadSample();
   }, []);
 
@@ -19,7 +18,7 @@ export default function Home() {
     <div className="grid-bg flex min-h-screen flex-col">
       <ControlBar />
 
-      <main className="mx-auto w-full max-w-7xl flex-1 px-6 py-5">
+      <main className="mx-auto w-full max-w-[1800px] flex-1 px-4 py-5 sm:px-6">
         {error && (
           <div className="mb-4 rounded-lg border border-danger-600/30 bg-danger-600/10 px-4 py-3 text-sm text-danger-400">
             文件解析错误：{error}
@@ -36,9 +35,8 @@ export default function Home() {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-5 lg:grid-cols-[1fr_320px]">
-            <div className="space-y-5">
-              {/* 比赛数据 */}
+          <div className="grid grid-cols-1 gap-5 2xl:grid-cols-[minmax(0,1fr)_340px]">
+            <div className="min-w-0 space-y-5">
               <section>
                 <div className="mb-3 flex items-center justify-between">
                   <h2 className="font-display text-sm font-semibold tracking-wide text-ink-50">
@@ -48,21 +46,17 @@ export default function Home() {
                     Match Data
                   </span>
                 </div>
-                <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
+                <div className="grid grid-cols-1 gap-4 min-[1800px]:grid-cols-2">
                   {matches.map((m) => (
                     <MatchCard key={m.id} match={m} />
                   ))}
                 </div>
               </section>
 
-              {/* 单关推荐 */}
               <SingleBetTable />
-
-              {/* 串关推荐 */}
               <ParlayList />
             </div>
 
-            {/* 投注单汇总侧栏 */}
             <SelectionSummary />
           </div>
         )}

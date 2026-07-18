@@ -22,8 +22,7 @@ export default function ControlBar() {
 
   return (
     <header className="sticky top-0 z-30 w-full border-b border-base-700 bg-base-850/90 backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-6 gap-y-3 px-6 py-3">
-        {/* Logo / 标题 */}
+      <div className="mx-auto flex max-w-[1800px] flex-wrap items-center gap-x-6 gap-y-3 px-4 py-3 sm:px-6">
         <div className="flex flex-shrink-0 items-center gap-3">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-500/15 ring-1 ring-accent-500/30">
             <Crosshair className="h-5 w-5 text-accent-400" />
@@ -40,7 +39,6 @@ export default function ControlBar() {
 
         <div className="hidden h-8 w-px bg-base-700 lg:block" />
 
-        {/* 总资金 */}
         <div className="flex items-center gap-2">
           <Wallet className="h-4 w-4 text-ink-500" />
           <label className="text-xs font-medium text-ink-400">总资金</label>
@@ -60,7 +58,6 @@ export default function ControlBar() {
 
         <div className="hidden h-8 w-px bg-base-700 lg:block" />
 
-        {/* 凯利模式切换 */}
         <div className="flex items-center gap-2">
           <Gauge className="h-4 w-4 text-ink-500" />
           <label className="text-xs font-medium text-ink-400">投注模式</label>
@@ -112,7 +109,7 @@ export default function ControlBar() {
 
       {matches.length > 0 && (
         <div className="border-t border-base-800 bg-base-900/60 px-6 py-1.5">
-          <div className="mx-auto flex max-w-7xl items-center gap-4 font-mono text-[11px] text-ink-600">
+          <div className="mx-auto flex max-w-[1800px] items-center gap-4 font-mono text-[11px] text-ink-600">
             <span>
               已加载 <span className="text-accent-400">{matches.length}</span> 场比赛
             </span>

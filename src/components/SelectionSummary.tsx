@@ -68,7 +68,7 @@ export default function SelectionSummary() {
   };
 
   return (
-    <aside className="sticky top-[5.5rem] flex max-h-[calc(100vh-7rem)] flex-col rounded-xl border border-base-700 bg-base-850 shadow-card lg:max-h-[calc(100vh-8rem)]">
+    <aside className="flex flex-col rounded-xl border border-base-700 bg-base-850 shadow-card 2xl:sticky 2xl:top-[5.5rem] 2xl:max-h-[calc(100vh-8rem)]">
       {/* 头部 */}
       <div className="flex items-center justify-between border-b border-base-700 px-5 py-3">
         <div className="flex items-center gap-2">
