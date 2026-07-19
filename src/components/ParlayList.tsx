@@ -1,3 +1,4 @@
+import { useMemo, useState } from "react";
 import { useBettingStore } from "../store/useBettingStore";
 import { KELLY_MODE_LABEL } from "../lib/types";
 import { Layers } from "lucide-react";
@@ -7,10 +8,27 @@ export default function ParlayList() {
   const selected = useBettingStore((s) => s.selectedParlay);
   const toggle = useBettingStore((s) => s.toggleParlay);
   const kellyMode = useBettingStore((s) => s.kellyMode);
+  const [activeTab, setActiveTab] = useState<"all" | "2x1" | "3x1">("all");
+
+  const grouped = useMemo(() => {
+    return {
+      all: parlays,
+      "2x1": parlays.filter((p) => p.legs.length === 2),
+      "3x1": parlays.filter((p) => p.legs.length === 3),
+    };
+  }, [parlays]);
+
+  const visibleParlays = grouped[activeTab];
+
+  const tabs: { key: "all" | "2x1" | "3x1"; label: string }[] = [
+    { key: "all", label: `全部 (${parlays.length})` },
+    { key: "2x1", label: `2串1 (${grouped["2x1"].length})` },
+    { key: "3x1", label: `3串1 (${grouped["3x1"].length})` },
+  ];
 
   return (
     <section className="rounded-xl border border-base-700 bg-base-800/60 shadow-card">
-      <div className="flex items-center justify-between border-b border-base-700 px-5 py-3">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-base-700 px-5 py-3">
         <div className="flex items-center gap-2">
           <Layers className="h-4 w-4 text-warn-400" />
           <h2 className="font-display text-sm font-semibold tracking-wide text-ink-50">
@@ -20,18 +38,31 @@ export default function ParlayList() {
             {parlays.length} 组 · 正凯利
           </span>
         </div>
-        <p className="hidden font-mono text-[10px] text-ink-600 sm:block">
-          2串1 / 3串1
-        </p>
+
+        <div className="flex items-center gap-1 rounded-lg border border-base-600 bg-base-800 p-0.5">
+          {tabs.map((tab) => (
+            <button
+              key={tab.key}
+              onClick={() => setActiveTab(tab.key)}
+              className={`rounded-md px-3 py-1 text-xs font-semibold transition ${
+                activeTab === tab.key
+                  ? "bg-accent-500 text-base-900"
+                  : "text-ink-500 hover:text-ink-50"
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {parlays.length === 0 ? (
+      {visibleParlays.length === 0 ? (
         <div className="px-5 py-10 text-center font-mono text-xs text-ink-600">
-          暂无正凯利串关组合，需至少 2 场比赛
+          当前类型暂无正凯利串关组合
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-3 p-4 lg:grid-cols-2">
-          {parlays.map((p) => {
+          {visibleParlays.map((p) => {
             const checked = selected.has(p.id);
             return (
               <label
@@ -50,7 +81,6 @@ export default function ParlayList() {
                     onChange={() => toggle(p.id)}
                   />
                   <div className="min-w-0 flex-1">
-                    {/* 组合描述 */}
                     <p className="mb-2 flex flex-wrap items-center gap-1.5 text-xs text-ink-50">
                       {p.legs.map((leg, i) => (
                         <span key={leg.id} className="flex items-center gap-1.5">
@@ -64,8 +94,7 @@ export default function ParlayList() {
                         </span>
                       ))}
                     </p>
-                    {/* 数据 */}
-                    <div className="grid grid-cols-2 gap-x-4 gap-y-2 sm:grid-cols-4 font-mono tnum text-[11px]">
+                    <div className="grid grid-cols-2 gap-x-4 gap-y-2 font-mono tnum text-[11px] sm:grid-cols-4">
                       <Metric label="组合赔率" value={p.combinedOdds.toFixed(2)} />
                       <Metric
                         label="组合概率"
